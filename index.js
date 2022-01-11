@@ -1,33 +1,61 @@
-function distanceFromHqInBlocks(blocks) {
-  if (blocks >= 42) {
-    return blocks - 42;
-  }
-  if (pickup < 42) {
+// function distanceFromHqInBlocks(pick_up) {
+//   if (pick_up >= 42) {
+//     return pick_up - 42;
+//   } else {
+//     return 42 - pick_up;
+//   }
+// }
+// function distanceFromHqInFeet(blocks) {
+//   let feetDistance = distanceFromHqInBlocks(blocks);
+//   return feetDistance * 264;
+// }
+
+// function distanceTravelledInFeet(startBlock, endBlock) {
+//   if (startBlock > endBlock) {
+//     return (startBlock - endBlock) * 264;
+//   } else return (endBlock - startBlock) * 264;
+// }
+// function calculatesFarePrice(startBlock, endBlock) {
+//   let feetDistance = distanceTravelledInFeet(startBlock, endBlock);
+//   if (feetDistance > 2500) {
+//     return "cannot travel that far";
+//   } else if (feetDistance > 2000) {
+//     return 25;
+//   } else if (feetDistance > 400) {
+//     return (feetDistance - 400) * 0.02;
+//   }
+//   return 0;
+// }
+
+function distanceFromHqInBlocks(pickup) {
+  if (pickup >= 42) {
+    return pickup - 42;
+  } else {
     return 42 - pickup;
   }
 }
-
 function distanceFromHqInFeet(blocks) {
-  let distance = distanceFromHqInBlocks(blocks);
-  return distance * 264;
+  let feetDistance = distanceFromHqInBlocks(blocks);
+  return feetDistance * 264;
 }
-function distanceTravelledInFeet(start, end) {
-  const block = 264;
-  if (start > end) {
-    return start * block - end * block;
-  } else if (start < end) {
-    return end * block - start * block;
+
+function distanceTravelledInFeet(startBlock, destinationBlock) {
+  if (startBlock > destinationBlock) {
+    return (startBlock - destinationBlock) * 264;
+  } else {
+    return (destinationBlock - startBlock) * 264;
   }
 }
-function calculatesFarePrice(start, end) {
-  const travel = (start - end) * 264;
-  if (travel <= 400) {
+
+function calculatesFarePrice(startBlock, destinationBlock) {
+  let feetDistance = distanceTravelledInFeet(startBlock, destinationBlock);
+  if (feetDistance < 400) {
     return 0;
-  } else if (travel >= 401 && travel <= 2000) {
-    return (travel - 400) * 0.02;
-  } else if (travel >= 2000 && travel <= 2500) {
+  } else if (feetDistance > 400 && feetDistance <= 2000) {
+    return (feetDistance - 400) * 0.02;
+  } else if (feetDistance > 2000 && feetDistance < 2500) {
     return 25;
-  } else if (travel >= 2500) {
+  } else if (feetDistance > 2500) {
     return "cannot travel that far";
   }
 }
